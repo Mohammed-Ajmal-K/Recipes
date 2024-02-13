@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Favorite Symbol Example</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="favorite-container">
+        <i id="favorite-icon" class="far fa-star"></i>
+    </div>
+
+    <script src="script.js"></script>
+<script>
+    const favoriteIcon = document.getElementById('favorite-icon');
+
+let isFavorite = false;
+
+favoriteIcon.addEventListener('click', () => {
+    isFavorite = !isFavorite;
+
+    if (isFavorite) {
+        favoriteIcon.classList.remove('far');
+        favoriteIcon.classList.add('fas', 'animated', 'heartBeat'); // Add animations if desired
+    } else {
+        favoriteIcon.classList.remove('fas', 'animated', 'heartBeat');
+        favoriteIcon.classList.add('far');
+    }
+});
+</script>
+</body>
+
+</html>
+.favorite-container {
+    display: inline-block;
+    cursor: pointer;
+}

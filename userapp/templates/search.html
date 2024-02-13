@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>All Recipes </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="manifest" href="{% static 'assets/site.webmanifest' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/slicknav.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+
+</head>
+<body>
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="{% static 'assets/img/logo/img1.jpg' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header>
+    <!-- Header Start -->
+    <div class="header-area">
+        <div class="main-header header-sticky">
+            <div class="container-fluid">
+                <div class="menu-wrapper">
+                    <!-- Logo -->
+                    <div class="logo">
+                        <a href="#"><img src="{% static 'assets/img/logo/img1.jpg' %}" alt="" style="height:100px;width:130px"></a>
+                    </div>
+                    <!-- Main-menu -->
+                    <div class="main-menu d-none d-lg-block">
+                        <nav>
+                            <ul id="navigation">
+                                <li><a href="{% url 'userpage' %}">Home</a></li>
+                                <li><a href="#">Cuisines</a>
+                                    <ul class="submenu">
+                                         {% for i in cuisine %}
+                                        <li><a href="{% url 'user_recipepage' i_name=i.name %}">{{i.name}}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </li>
+                                <li><a href="{% url 'aboutpage' %}">about</a></li>
+
+                                <li><a href="#">Pages</a>
+                                    <ul class="submenu">
+                                        <li><a href="{% url 'favoritepage' %}">Favorites</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <!-- Header Right -->
+                    <div class="header-right">
+                        <ul>
+                            <li style="padding-right: 70px;">
+                                <div style="margin-left: 30px;">
+                                    <form class="d-flex" role="search" method="GET" action="{% url 'search_results' %}" >
+                                        <input class="form-control me-2" type="search" name="query" style="border-radius: 8px;width: 300px; padding-left: 10px;" placeholder="What are you looking for?" aria-label="Search">
+                                        <button  type="submit" class="flaticon-search" style="border-color: white;background-color: black;padding-left: 10px;padding-right: 10px;padding-top: 5px; border-radius: 5px;"></button>
+                                    </form>
+                                </div>
+                            </li>
+
+                                {% if request.session.uname %}
+                                <li ><a href="#"  style="color:black;font-family:Josefin Sans,sans-serif">{{request.session.uname}}</a></li>
+                                <li ><a href="{% url 'userlogout' %}"  style="color:black;font-family:Josefin Sans,sans-serif">/Logout</a></li>
+                                {% else %}
+                                <li><a href="{% url 'registerpage' %}"  style="color:black;font-family:Josefin Sans,sans-serif">Register/SignIn</a></li>
+                                {% endif %}
+<!--                                <li><a href="cart.html"><span class="flaticon-shopping-cart"></span></a> </li>-->
+                        </ul>
+                    </div>
+<!--                        <div>-->
+<!--                            <img src="{% static 'assets/img/logo/heart-solid.svg' %}">-->
+
+<!--                        </div>-->
+                </div>
+                <!-- Mobile Menu -->
+                <div class="col-12">
+                    <div class="mobile_menu d-block d-lg-none"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+</header>
+
+        <div class="slider-area ">
+            <div class="single-slider slider-height2 d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="hero-cap text-center">
+
+                                <h2>Recipe</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% for cuisine in  cuisine_results %}
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6" style="margin-left: 500px; padding-top:200px">
+                        <div class="single-popular-items mb-50 text-center">
+                                                        <div class="popular-caption">
+                                <a href="#"><h3>{{cuisine.name}}</h3></a>
+                            </div>
+
+                            <div class="popular-img">
+                                <img src="{{cuisine.image.url}}" alt="" style="height:200px;width:400px">
+                                <div class="img-cap">
+                                    <a href="{% url 'user_recipepage' i_name=cuisine.name %}"><button class="btn btn-danger" style="width:400px">view more</button></a>
+<!--                                    <a href="#">View More</a>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        
+    {% endfor %}
+
+
+
+    <ul>
+        {% for recipe in recipe_results %}
+                <div class="product_image_area">
+          <div class="container">
+              <form method="post" action="{% url 'savefavorites' %}" enctype="multipart/form-data">
+                  {% csrf_token %}
+                <div class="row justify-content-center">
+                    <input type="hidden" value="{{request.session.uname}}" name="user">
+                    <h2 style="padding-bottom:50px;text-align: center;" >{{recipe.recipe_name}}</h2>
+                    <input name="rname" value="{{recipe.recipe_name}}" type="hidden">
+                    <div class="col-lg-12">
+                        <div class="product_img_slide owl-carousel">
+                            <div class="single_product_img">
+                                <img src="{{recipe.recipe_image.url}}" alt="#" class="img-fluid" style="height:500px;width:900px;padding-left:200px" name="rimg">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="single_product_text text-center">
+                            <h2>INCREDIENTS</h2>
+                                <textarea style="width:1300px;height:600px;border:0px;padding-right:500px ;padding-top:50px">{{recipe.ingredients}}</textarea>
+                            <h2 style="margin-top:100px">DIRECTIONS</h2>
+                            <textarea style="width:1300px;height:600px;border:0px;padding-right:500px;padding-top:50px">{{recipe.recipe_desc}}</textarea>
+                        </div>
+                            <div class="add_to_cart" style="padding-left:180px">
+                                <button href="#" class="btn btn-danger" style="margin-top:-300px;margin-left:130px"><a >add to favorites</a></button>
+                            </div>
+                    </div>
+                </div>
+              </form>
+          </div>
+        </div>
+
+
+        {% empty %}
+        <div style="margin:200px">
+            <li style="text-align:center"><h2>No recipes found.</h2></li>
+        </div>
+        {% endfor %}
+    </ul>
+    <footer style="margin-top:;background-color:black" class="divider">
+        <!-- Footer Start-->
+        <div class="footer-area footer-padding">
+            <div class="container">
+                <div class="row d-flex justify-content-between">
+                    <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
+                        <div class="single-footer-caption mb-50">
+                            <div class="single-footer-caption mb-30">
+                                <!-- logo -->
+                                <h1 style="color:red">ALL RECIPES</h1>
+                                <div class="footer-logo">
+                                    <a href="#"><img src="{% static 'assets/img/logo/img1.jpg' %}" alt="" style="height:150px;width:230px"></a>
+                                </div>
+                                <div class="footer-tittle">
+                                    <div class="footer-pera">
+                                        <p style="color:white">Nothing is better than going home to family and eating good food and relaxing</p>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-5" style="margin-top:100px;">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h5 style="color:red">CUISINES</h5><br>
+                                <ul>
+<!--                                    <li><a href="#" style="color:black">Cuisines</a></li>-->
+                                    {% for i in dataitem %}
+                                    <li><a href="{% url 'user_recipepage' i_name=i.name %}" style="color:white">{{i.name}}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-7"  style="margin-top:130px;margin-right:200px">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                    <h5 style="color:red">QUICK LINKS</h5><br>
+                                <ul>
+                                    <li><a href="{% url 'aboutpage' %}" style="color:white">About Us</a></li>
+                                    <li><a href="{% url 'favoritepage' %}" style="color:white">Favorites</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer bottom -->
+                <div class="row align-items-center">
+                    <div class="col-xl-7 col-lg-8 col-md-7">
+                        <div class="footer-copy-right">
+                            <p>
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved<i class="fa fa-heart" aria-hidden="true"></i> to <a href="{% url 'userpage' %}" target="_blank">All recipes</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End-->
+    </footer >
+    <script src="{% static 'assets/js/vendor/modernizr-3.5.0.min.js' %}"></script>
+    <!-- Jquery, Popper, Bootstrap -->
+    <script src="{% static 'assets/js/vendor/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="{% static 'assets/js/jquery.slicknav.min.js' %}"></script>
+
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'assets/js/slick.min.js' %}"></script>
+
+    <!-- One Page, Animated-HeadLin -->
+    <script src="{% static 'assets/js/wow.min.js' %}"></script>
+    <script src="{% static 'assets/js/animated.headline.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.magnific-popup.js' %}"></script>
+
+    <!-- Scrollup, nice-select, sticky -->
+    <script src="{% static 'assets/js/jquery.scrollUp.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.sticky.js' %}"></script>
+
+    <!-- contact js -->
+    <script src="{% static 'assets/js/contact.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.form.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'assets/js/mail-script.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.ajaxchimp.min.js' %}"></script>
+
+    <!-- Jquery Plugins, main Jquery -->
+    <script src="{% static 'assets/js/plugins.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+</html>

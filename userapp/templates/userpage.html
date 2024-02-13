@@ -1,0 +1,295 @@
+<!doctype html>
+{% load static %}
+<html class="no-js" lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>All Recipes </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="{% static 'assets/site.webmanifest' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico' %}">
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/slicknav.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+
+<body>
+    <!--? Preloader Start -->
+    <div id="preloader-active">
+        <div class="preloader d-flex align-items-center justify-content-center">
+            <div class="preloader-inner position-relative">
+                <div class="preloader-circle"></div>
+                <div class="preloader-img pere-text">
+                    <img src="{% static 'assets/img/logo/img1.jpg' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Preloader Start -->
+    <header>
+        <!-- Header Start -->
+        <div class="header-area">
+            <div class="main-header header-sticky">
+                <div class="container-fluid">
+                    <div class="menu-wrapper">
+                        <!-- Logo -->
+                        <div class="logo">
+                            <a href="#"><img src="{% static 'assets/img/logo/img1.jpg' %}" alt="" style="height:100px;width:130px"></a>
+                        </div>
+                        <!-- Main-menu -->
+                        <div class="main-menu d-none d-lg-block">
+                            <nav>
+                                <ul id="navigation">
+                                    <li><a href="{% url 'userpage' %}">Home</a></li>
+                                    <li><a href="#">Cuisines</a>
+                                        <ul class="submenu">
+                                             {% for i in dataitem %}
+                                            <li><a href="{% url 'user_recipepage' i_name=i.name %}">{{i.name}}</a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                    <li><a href="{% url 'aboutpage' %}">about</a></li>
+                                    <li><a href="{% url 'feedbackpage' %}">Feedback</a></li>
+
+                                    <li><a href="{% url 'favoritepage' %}">Favorites</a>
+<!--                                        <ul class="submenu">-->
+<!--                                            <li><a href="">Favorites</a></li>-->
+<!--                                        </ul>-->
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <!-- Header Right -->
+                        <div class="header-right">
+                            <ul>
+                                <li style="padding-right: 70px;">
+                                    <div style="margin-left: 30px;">
+                                        <form class="d-flex" role="search" method="GET" action="{% url 'search_results' %}" >
+                                            <input class="form-control me-2" type="search" name="query" style="border-radius: 8px;width: 300px; padding-left: 10px;" placeholder="What are you looking for?" aria-label="Search">
+                                            <button  type="submit" class="flaticon-search"
+                                                 style="border-color: white;background-color: black;padding-left: 10px;padding-right: 10px;padding-top: 5px; border-radius: 5px;"></button>
+                                        </form>
+                                    </div>
+                                </li>
+
+                                    {% if request.session.uname %}
+                                    <li ><a href="#"  style="color:black;font-family:Josefin Sans,sans-serif">{{request.session.uname}}</a></li>
+                                    <li ><a href="{% url 'userlogout' %}"  style="color:black;font-family:Josefin Sans,sans-serif">/Logout</a></li>
+                                    {% else %}
+                                    <li><a href="{% url 'registerpage' %}"  style="color:black;font-family:Josefin Sans,sans-serif">Register/SignIn</a></li>
+                                    {% endif %}
+                                <li><a href="cart.html"><img class="fa-solid fa-heart fa-xl" style="color: #ff3300;"></a> </li>
+                            </ul>
+                        </div>
+<!--                        <div class="logo">-->
+<!--                            <span >-->
+<!--&lt;!&ndash;                            <li>&ndash;&gt;-->
+<!--                                <a href="{% url 'favoritepage' %}"><img src="{% static 'assets/img/logo/heart.svg' %}"></a>-->
+<!--                            </span>-->
+
+<!--&lt;!&ndash;                            </li>&ndash;&gt;-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <img src="{% static 'assets/img/logo/heart-solid.svg' %}">-->
+
+<!--                        </div>-->
+                    </div>
+                    <!-- Mobile Menu -->
+                    <div class="col-12">
+                        <div class="mobile_menu d-block d-lg-none"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header End -->
+    </header>
+    {% block content %}
+    <main>
+        <!--? slider Area Start -->
+        <div class="slider-area ">
+            <div class="slider-active">
+                <!-- Single Slider -->
+                <div class="single-slider slider-height d-flex align-items-center slide-bg" >
+                    <div class="container">
+                        <div class="row justify-content-between align-items-center" >
+                            <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
+                                <div class="hero__caption" style="margin-riht:200px">
+                                    <h1 data-animation="fadeInLeft" data-delay=".4s" data-duration="2000ms" style="font-size:100px">All Recipes</h1>
+                                    <p data-animation="fadeInLeft" data-delay=".7s" data-duration="2000ms">Nothing is better than going home to family and eating good food and relaxing</p>
+                                    <!-- Hero-btn -->
+                                    <div class="hero__btn" data-animation="fadeInLeft" data-delay=".8s" data-duration="2000ms">
+                                        <a href="{% url 'add_userecipe' %}" class="btn hero-btn">Add Your Recipe</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4 d-none d-sm-block">
+                                <div class="hero__img" data-animation="bounceIn" data-delay=".4s" >
+                                    <img src="{% static 'assets/img/hero/logo.jpg' %}" alt="" class=" heartbeat" style="margin-rigt:500px;height:800px">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Single Slider -->
+            </div>
+        </div>
+        <!-- slider Area End-->
+        <!-- ? New Product Start -->
+        <!--  New Product End -->
+        <!--? Gallery Area Start -->
+        <!-- Gallery Area End -->
+        <!--? Popular Items Start -->
+        <div class="popular-items section-padding30">
+            <div class="container">
+                <!-- Section tittle -->
+                <div class="row justify-content-center" style="margin-top:-50px">
+                    <div class="col-xl-7 col-lg-8 col-md-10">
+                        <div class="section-tittle mb-70 text-center">
+                            <h2>All Recipes</h2>
+                            <p>Choose Your Way To Cooking</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for i in dataitem %}
+                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+                        <div class="single-popular-items mb-50 text-center">
+                            <div class="popular-img">
+                                <img src="{{i.image.url}}" alt="" style="height:200px;width:400px">
+                                <div class="img-cap">
+                                    <a href="{% url 'user_recipepage' i_name=i.name %}"><span>View More</span></a>
+                                </div>
+                                <div class="favorit-items">
+                                    <div class="flaticon-heart">>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="popular-caption">
+                                <h3><a href="#">{{i.name}}</a></h3>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </main>
+    {% endblock %}
+    <footer style="margin-top:;background-color:black" class="divider">
+        <!-- Footer Start-->
+        <div class="footer-area footer-padding">
+            <div class="container">
+                <div class="row d-flex justify-content-between">
+                    <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
+                        <div class="single-footer-caption mb-50">
+                            <div class="single-footer-caption mb-30">
+                                <!-- logo -->
+                                <h1 style="color:red">ALL RECIPES</h1>
+                                <div class="footer-logo">
+                                    <a href="#"><img src="{% static 'assets/img/logo/img1.jpg' %}" alt="" style="height:150px;width:230px"></a>
+                                </div>
+                                <div class="footer-tittle">
+                                    <div class="footer-pera">
+                                        <p style="color:white">Nothing is better than going home to family and eating good food and relaxing</p>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-5" style="margin-top:100px;">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                <h5 style="color:red">CUISINES</h5><br>
+                                <ul>
+<!--                                    <li><a href="#" style="color:black">Cuisines</a></li>-->
+                                    {% for i in dataitem %}
+                                    <li><a href="{% url 'user_recipepage' i_name=i.name %}" style="color:white">{{i.name}}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-7"  style="margin-top:130px;margin-right:200px">
+                        <div class="single-footer-caption mb-50">
+                            <div class="footer-tittle">
+                                    <h5 style="color:red">QUICK LINKS</h5><br>
+                                <ul>
+                                    <li><a href="{% url 'aboutpage' %}" style="color:white">About Us</a></li>
+                                    <li><a href="{% url 'favoritepage' %}" style="color:white">Favorites</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer bottom -->
+                <div class="row align-items-center">
+                    <div class="col-xl-7 col-lg-8 col-md-7">
+                        <div class="footer-copy-right">
+                            <p>
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved<i class="fa fa-heart" aria-hidden="true"></i> to <a href="{% url 'userpage' %}" target="_blank">All recipes</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End-->
+    </footer >
+    <!--? Search model Begin -->
+    <div class="search-model-box">
+        <div class="h-100 d-flex align-items-center justify-content-center">
+            <div class="search-close-btn">+</div>
+            <form class="search-model-form">
+                <input type="text" id="search-input" placeholder="Searching key.....">
+            </form>
+        </div>
+    </div>
+    <!-- Search model end -->
+
+    <!-- JS here -->
+
+    <script src="{% static 'assets/js/vendor/modernizr-3.5.0.min.js' %}"></script>
+    <!-- Jquery, Popper, Bootstrap -->
+    <script src="{% static 'assets/js/vendor/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'assets/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="{% static 'assets/js/jquery.slicknav.min.js' %}"></script>
+
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'assets/js/slick.min.js' %}"></script>
+
+    <!-- One Page, Animated-HeadLin -->
+    <script src="{% static 'assets/js/wow.min.js' %}"></script>
+    <script src="{% static 'assets/js/animated.headline.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.magnific-popup.js' %}"></script>
+
+    <!-- Scrollup, nice-select, sticky -->
+    <script src="{% static 'assets/js/jquery.scrollUp.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.sticky.js' %}"></script>
+
+    <!-- contact js -->
+    <script src="{% static 'assets/js/contact.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.form.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'assets/js/mail-script.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.ajaxchimp.min.js' %}"></script>
+
+    <!-- Jquery Plugins, main Jquery -->
+    <script src="{% static 'assets/js/plugins.js' %}"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+</html>

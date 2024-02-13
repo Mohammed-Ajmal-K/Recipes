@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% extends 'adminpage.html' %}
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="col-xlg-30 stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">RECIPES</h4>
+                  <div>
+                    <table  class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Cuisine</th>
+                          <th>Recipe name</th>
+                          <th>Image</th>
+                          <th>Ingredients</th>
+                          <th>Preparation</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody  style="text-align:left">
+                      {% for j in rdata %}
+                        <tr class="table-info" >
+                          <td>{{j.item}}</td>
+                            <td>{{j.recipe_name}}</td>
+                          <td>
+                              <img src="{{j.recipe_image.url}}" style="width:30px: height:40px">
+                          </td>
+                          <td><textarea style="height:200px;width:350px">{{j.ingredients}}</textarea></td>
+                          <td><textarea style="height:200px;width:400px">{{j.recipe_desc}}</textarea></td>
+                          <td>
+                              <form action="{% url 'editrecipe' rid=j.id %}">
+                                  <button type="submit" class="btn btn-dark mr-2" style="text-align:center;margin-left:10px">Edit</button>
+                              </form>
+                          </td>
+                        <td>
+                              <form action="{% url 'deleterecipe' rid=j.id %}">
+                                  <button type="submit" class="btn btn-dark mr-1" >Delete</button>
+                              </form>
+                        </td>
+                        </tr>
+                      {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+</body>
+</html>
+{% endblock %}

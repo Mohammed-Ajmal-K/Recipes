@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"> -->
+    <title>All Recipes</title>
+</head>
+<body>
+    {% for d in fdata %}
+    <h1>{{d.recipe}}</h3>
+    <h3>INGREDIENTS</h2>
+    <textarea style="width: 500px;height: 500px;border: 0px;">{{d.ingredients}}</textarea>
+    <h3>DIRECTIONS</h2>
+    <textarea style="width: 1500px;height: 500px;border: 0px;">{{d.description}}</textarea>
+    {% endfor %}
+    <button onclick="window.print()" style="background-color: red;color: white;border: 0px; height: 50px;width: 100px;margin-left:  600px;" >Download</button>
+</body>
+</html>
